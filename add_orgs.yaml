@@ -2,7 +2,7 @@
 - name: Import AAP orgs
   hosts: localhost
   gather_facts: no
-  
+
   tasks:
   - name: Read organisations file
     include_vars:
@@ -16,4 +16,6 @@
       controller_username: "admin"
       controller_password: "redhat"
       controller_host: "192.168.1.21"
+      validate_certs: false
+
     with_items: "{{ organisations }}"
