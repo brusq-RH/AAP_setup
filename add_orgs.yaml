@@ -2,11 +2,7 @@
 - name: Import AAP orgs
   hosts: localhost
   gather_facts: no
-  vars:
-    controller_username: "admin"
-    controller_password: "redhat"
-    controller_host: "192.168.1.21"
-
+  
   tasks:
   - name: Read organisations file
     include_vars:
@@ -17,4 +13,7 @@
       name: "{{ item }}"
       description: "{{ item }} bar organization"
       state: present
+      controller_username: "admin"
+      controller_password: "redhat"
+      controller_host: "192.168.1.21"
     with_items: "{{ organisations }}"
