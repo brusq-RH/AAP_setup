@@ -1,0 +1,20 @@
+---
+- name: Import AAP orgs
+  hosts: localhost
+  gather_facts: no
+  vars:
+    tower_username: "admin"
+    tower_password: "redhat"
+    tower_host: "192.168.1.21"
+
+  tasks:
+  - name: Read organisations file
+    include_vars:
+      file: organisations.yaml
+
+  - name: Create organization
+    awx.awx.organization:
+      name: "{{ item }}"
+      description: "{{ item }} bar organization"
+      state: present
+    with_items: "{{ organisations }}"
